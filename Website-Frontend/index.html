@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/canfusion_logo.svg" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CanFusion</title>
+  <!-- Include Cesium CSS directly -->
+  <link href="/cesium/Widgets/widgets.css" rel="stylesheet" />
+  <!-- Include model-viewer scripts -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+  <style>
+    /* Ensure full height for the body */
+    html, body, #app {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+  <!-- Load Cesium first, before Vue -->
+  <script src="/cesium/Cesium.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    // Configure Cesium base URL
+    window.CESIUM_BASE_URL = '/cesium';
+    
+    // Set token from environment variable
+    window.CESIUM_TOKEN = import.meta.env.VITE_CESIUM_TOKEN;
+    
+    // Set Ion token immediately
+    if (window.Cesium && window.Cesium.Ion) {
+      window.Cesium.Ion.defaultAccessToken = window.CESIUM_TOKEN;
+    }
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
